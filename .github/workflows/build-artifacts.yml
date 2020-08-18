@@ -5,6 +5,11 @@ on:
     branches:
       - release
 
+env:
+  BUILD_VERSION: ${{ github.run_number }}
+  WIN_VERSION: win-${{ env.BUILD_VERSION }}
+  OSX_VERSION: osx-${{ env.BUILD_VERSION }}
+
 jobs:
   windows:
     runs-on: windows-latest
@@ -40,8 +45,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: win-${{ github.ref }}
-        release_name: Release win-${{ github.ref }}
+        tag_name: ${{ env.WIN_VERSION }}
+        release_name: Release ${{ env.WIN_VERSION }}
         draft: false
         prerelease: false
     - name: Upload Release Asset
@@ -52,7 +57,7 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
         asset_path: ./HappyMusic-1.0.msi
-        asset_name: HappyMusic-${{ github.ref }}.msi
+        asset_name: HappyMusic-${{ env.BUILD_VERSION }}.msi
         asset_content_type: application/octet-stream
 
   osx:
@@ -89,8 +94,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: osx-${{ github.ref }}
-          release_name: Release osx-${{ github.ref }}
+          tag_name: ${{ env.OSX_VERSION }}
+          release_name: Release ${{ env.OSX_VERSION }}
           draft: false
           prerelease: false
       - name: Upload Release Asset
@@ -101,5 +106,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
           asset_path: ./HappyMusic-1.0.dmg
-          asset_name: HappyMusic-${{ github.ref }}.dmg
+          asset_name: HappyMusic-${{ env.BUILD_VERSION }}.dmg
           asset_content_type: application/x-apple-diskimage
