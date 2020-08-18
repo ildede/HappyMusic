@@ -54,6 +54,7 @@ jobs:
     - name: Upload installer
       uses: actions/upload-artifact@v2
       with:
+        name: HappyMusic-1.0.msi
         path: HappyMusic-1.0.msi
 
   osx:
@@ -88,4 +89,5 @@ jobs:
       - name: Upload installer
         uses: actions/upload-artifact@v2
         with:
+          name: HappyMusic-1.0.dmg
           path: HappyMusic-1.0.dmg
