@@ -21,8 +21,18 @@ jobs:
       with:
         java-version: 14
 
+    - name: Cache Maven packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+
     - name: Build with Maven
-      run: mvn -B package --file pom.xml && mvn -B javafx:jlink --file main-ui/pom.xml
+      run: mvn -B clean install --file pom.xml
+
+    - name: Build main-ui with jlink
+      run: mvn -B javafx:jlink --file main-ui/pom.xml
 
     - name: Package as msi
       run: jpackage --name HappyMusic --type msi --runtime-image main-ui/target/happy --module cloud.happydev.music.ui/cloud.happydev.music.ui.App --win-dir-chooser
