@@ -54,6 +54,13 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.4</version>
                 <configuration>
+                    <stripDebug>true</stripDebug>
+                    <compress>2</compress>
+                    <noHeaderFiles>true</noHeaderFiles>
+                    <noManPages>true</noManPages>
+                    <launcher>happymusic</launcher>
+                    <jlinkImageName>happy</jlinkImageName>
+                    <jlinkZipName>happymusic</jlinkZipName>
                     <mainClass>cloud.happydev.music.ui.App</mainClass>
                 </configuration>
             </plugin>
