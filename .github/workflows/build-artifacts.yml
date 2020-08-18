@@ -7,8 +7,8 @@ on:
 
 env:
   BUILD_VERSION: ${{ github.run_number }}
-  WIN_VERSION: win-${{ env.BUILD_VERSION }}
-  OSX_VERSION: osx-${{ env.BUILD_VERSION }}
+  WIN_VERSION: win-${{ github.run_number }}
+  OSX_VERSION: osx-${{ github.run_number }}
 
 jobs:
   windows:
