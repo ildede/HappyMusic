@@ -53,6 +53,7 @@ jobs:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
         asset_path: ./HappyMusic-1.0.msi
         asset_name: HappyMusic-${{ github.ref }}.msi
+        asset_content_type: application/octet-stream
 
   osx:
     runs-on: macos-latest
@@ -101,3 +102,4 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
           asset_path: ./HappyMusic-1.0.dmg
           asset_name: HappyMusic-${{ github.ref }}.dmg
+          asset_content_type: application/x-apple-diskimage
