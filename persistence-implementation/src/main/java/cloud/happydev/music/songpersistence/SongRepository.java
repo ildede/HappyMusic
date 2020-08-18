@@ -15,6 +15,8 @@ public class SongRepository implements Repository<Song> {
 
     public SongRepository() {
         this.songs = new HashMap<>();
+        this.songs.put("primary", new Song("Primary song"));
+        this.songs.put("secondary", new Song("Secondary song"));
     }
 
     @Override
