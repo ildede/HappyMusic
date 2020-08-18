@@ -57,7 +57,7 @@ jobs:
         path: HappyMusic-1.0.msi
 
   osx:
-    runs-on: macos
+    runs-on: macos-latest
     needs: compile
     name: Test and build OSX version
 
