@@ -11,7 +11,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -22,3 +22,17 @@ jobs:
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+
+    - name: Build javafx main-ui
+      run: mvn -B javafx:jlink --file main-ui/pom.xml
+
+    - name: Package as msi
+      run: jpackage --name HappyMusic --type msi --runtime-image main-ui/target/happy --module cloud.happydev.music.ui/cloud.happydev.music.ui.App --win-dir-chooser
+
+    - name: View artifacts
+      run: dir
+    - name: Upload installer
+      uses: actions/upload-artifact@v2
+      with:
+        name: msis
+        path: HappyMusic-1.0.msi
